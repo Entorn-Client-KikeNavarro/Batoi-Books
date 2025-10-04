@@ -29,3 +29,17 @@ document.querySelector('#app').innerHTML = `
   </div>
 `
 console.log("hola")
+
+try {
+  const user = getUserById(data.users, 1);
+  console.log("Usuario encontrado:", user);
+} catch (error) {
+  alert("Error al buscar usuario: " + error.message);
+}
+
+try {
+  const book = getBookById(data.books, 9999);
+  console.log("Libro encontrado:", book);
+} catch (error) {
+  alert("Error al buscar libro: " + error.message);
+}
