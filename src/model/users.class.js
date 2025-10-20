@@ -1,25 +1,20 @@
 import User from "./user.class.js";
-
-let nextId = 1;
+import { getDBUsers } from '../services/api.js'
 
 export default class Users {
   constructor() {
     this.data = [];
   }
 
-  populate(data) {
-    this.data = data.map(
+  async populate() {
+    const users = await getDBUsers();
+    this.data = users.map(
       (item) => new User(item.id, item.nick, item.email, item.password)
     );
-
-    const maxId = this.data.reduce(
-      (max, item) => (item.id > max ? item.id : max),
-      0
-    );
-    nextId = maxId + 1;
   }
 
-  addUser(user) {
+  async addUser(user) {
+    const dbUser = await addDBUser(user)
     const newUser = new User(nextId++, user.nick, user.email, user.password);
     this.data.push(newUser);
     return newUser;
