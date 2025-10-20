@@ -50,7 +50,7 @@ export default class Users {
     return text;
   }
 
-  getUserById(userId) {
+    getUserById(userId) {
     const user = this.data.find((item) => item.id === userId);
     if (!user) {
       throw new Error(`No hay usuario con ese id`);
