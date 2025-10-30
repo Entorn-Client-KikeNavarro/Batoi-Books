@@ -1,18 +1,16 @@
-/* Estilos generales para centrar todo */
 div {
-  display: flex;
+display: flex;
   flex-direction: column; /* Coloca elementos uno debajo de otro */
   align-items: center;    /* Centra horizontalmente */
   justify-content: center;/* Centra verticalmente */
-  min-height: 100vh;      /* Ocupa toda la altura */
   text-align: center;     /* Centra el texto */
-  font-family: Arial, Helvetica, sans-serif;
+font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Logo */
 .logo {
-  width: 150px;  /* ajusta el tamaño a tu gusto */
-  height: auto;
+  width: 150px;  /* ajusta el tamaño a tu gusto */  
+    height: auto;
   margin-bottom: 20px; /* espacio debajo del logo */
 }
 

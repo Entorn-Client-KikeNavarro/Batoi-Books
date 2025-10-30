@@ -21,11 +21,21 @@ export default class Modules {
     return text;
   }
 
-  getModuleByCode(moduleCode) {
-    const module = this.data.find((item) => item.code === moduleCode);
-    if (!module) {
-      throw new Error(`No hay módulo con ese code`);
-    }
-    return module;
-  }
+/**
+ * Devuelve el array de módulos
+ * @returns {Array}
+ */
+getModules() {
+  return this.data;
+}
+
+/**
+ * Devuelve un módulo buscando por su CÓDIGO
+ * @param {string} code 
+ * @returns {object}
+ */
+getModuleByCode(code) {
+  
+  return this.data.find(module => module.code === code);
+}
 }

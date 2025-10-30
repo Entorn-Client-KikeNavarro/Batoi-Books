@@ -1,3 +1,5 @@
+import { getDBBook } from '../services/api.js';
+
 import Book from "./book.class.js";
 let nextId = 1;
 const NOTES = "Apunts";
@@ -42,13 +44,17 @@ export default class Books {
     return book;
   }
 
-  getBookById(bookId) {
-    const book = this.data.find((item) => item.id === bookId);
-    if (!book) {
-      throw new Error(`No existe el libro con id ${bookId}`);
+async getBookById(id) {
+    // Ya no busca en this.data, llama directamente a la API
+    try {
+      const book = await getDBBook(id);
+      return book;
+    } catch (error) {
+      console.error(error);
+      return null; // O manejar el error como prefieras
     }
-    return book;
   }
+  
   bookExists(userId, moduleCode) {
     return !!this.data.find(
       (item) => item.userId === userId && item.moduleCode === moduleCode
