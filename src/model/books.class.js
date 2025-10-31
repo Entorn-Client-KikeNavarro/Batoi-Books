@@ -1,108 +1,47 @@
-import { getDBBook } from '../services/api.js';
-
 import Book from "./book.class.js";
-let nextId = 1;
-const NOTES = "Apunts";
-export default class Books {
-  constructor(data) {
-    this.data = this.data || [];
-  }
+import {getDBBooks, addDBBook , removeDBBook, changeDBBook} from '../services/api.js'
 
-  populate(libros) {
-    libros.forEach((libro) => {
-      let libroNuevo = new Book(libro);
-      this.data.push(libroNuevo);
-    });
-    const maxId = this.data.reduce(
-      (max, item) => (item.id > max ? item.id : max),
-      0
-    );
-    nextId = maxId + 1;
-  }
-
-  addBook(book) {
-    const newBook = new Book({ id: nextId++, ...book });
-    this.data.push(newBook);
-    return newBook;
-  }
-
-  removeBook(bookId) {
-    const index = this.getBookIndexById(bookId);
-    this.data.splice(index, 1);
-  }
-
-  changeBook(book) {
-    const index = this.getBookIndexById(book.id);
-    const modifiedBook = new Book(book);
-    this.data.splice(index, 1, modifiedBook);
-    return modifiedBook;
-  }
-
-  getBookIndexById(bookId) {
-    let book = this.data.findIndex((libro) => libro.id === bookId);
-    if (book === -1) throw new Error("Libro no encontrado");
-    return book;
-  }
-
-async getBookById(id) {
-    // Ya no busca en this.data, llama directamente a la API
-    try {
-      const book = await getDBBook(id);
-      return book;
-    } catch (error) {
-      console.error(error);
-      return null; // O manejar el error como prefieras
+export default class Books{
+    constructor(){
+        this.data = [];
     }
-  }
-  
-  bookExists(userId, moduleCode) {
-    return !!this.data.find(
-      (item) => item.userId === userId && item.moduleCode === moduleCode
-    );
-  }
 
-  booksFromUser(userId) {
-    return this.data.filter((item) => item.userId === userId);
-  }
+    async populate(){
+        const books = await getDBBooks();
+        books.forEach(book => {
+            let libroAIntroducir = new Book(book);
+            this.data.push(libroAIntroducir);
+        });
+    }
 
-  booksFromModule(moduleCode) {
-    return this.data.filter((item) => item.moduleCode === moduleCode);
-  }
+    async getBook(id){
+        const returnedBook = await getDBBook(id);
+        return returnedBook;
+    }
 
-  booksCheeperThan(price) {
-    return this.data.filter((item) => item.price <= price);
-  }
+    async addBook(book){
+        const bookAdd = await addDBBook(book);
+        return bookAdd;
+    }
 
-  booksWithStatus(status) {
-    return this.data.filter((item) => item.status === status);
-  }
+    async changeBook(book){
+        const bookchanged = await changeDBBook(book);
+        return bookchanged;
+    }
 
-  averagePriceOfBooks(books) {
-    const sum = this.data.reduce((total, item) => total + item.price, 0);
-    return this.data.length
-      ? (sum / this.data.length).toFixed(2) + " €"
-      : "0.00 €";
-  }
+    getBookIndexById(bookId) {
+    const index = this.data.findIndex((book) => book.id === bookId);
+    if (index === -1) throw new Error("Book not found");
+    return index;
+    }
 
-  booksOfTypeNotes(books) {
-    return this.data.filter((item) => item.publisher === NOTES);
-  }
+    async removeBook(id){
+        const removedBok = await removeDBBook(id);
+        const index = this.getBookIndexById(id);
+        this.data.splice(index, 1);
+    }
 
-  booksNotSold(books) {
-    return this.data.filter((item) => !item.soldDate);
-  }
-
-  incrementPriceOfbooks(increment) {
-    return this.data.map((book) => ({
-      ...book,
-      price: Math.round(book.price * (1 + increment) * 100) / 100,
-    }));
-  }
-  toString() {
-    let text = `Books: ${this.data.length}`;
-    this.data.forEach((item) => {
-      text += `\n${item.toString()}`;
-    });
-    return text;
-  }
+    toString(){
+        
+    }
 }

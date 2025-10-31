@@ -1,76 +1,44 @@
 import User from "./user.class.js";
-
-let nextId = 1;
-
-export default class Users {
-  constructor() {
-    this.data = [];
-  }
-
-  populate(data) {
-    this.data = data.map(
-      (item) => new User(item.id, item.nick, item.email, item.password)
-    );
-
-    const maxId = this.data.reduce(
-      (max, item) => (item.id > max ? item.id : max),
-      0
-    );
-    nextId = maxId + 1;
-  }
-
-  addUser(user) {
-    const newUser = new User(nextId++, user.nick, user.email, user.password);
-    this.data.push(newUser);
-    return newUser;
-  }
-
-  removeUser(userId) {
-    const index = this.getUserIndexById(userId);
-    this.data.splice(index, 1);
-  }
-
-  changeUser(user) {
-    const index = this.getUserIndexById(user.id);
-    const modifiedUser = new User(
-      user.id,
-      user.nick,
-      user.email,
-      user.password
-    );
-    this.data.splice(index, 1, modifiedUser);
-    return modifiedUser;
-  }
-
-  toString() {
-    let text = `Users: ${this.data.length}`;
-    this.data.forEach((item) => {
-      text += `\n${item.toString()}`;
-    });
-    return text;
-  }
-
-    getUserById(userId) {
-    const user = this.data.find((item) => item.id === userId);
-    if (!user) {
-      throw new Error(`No hay usuario con ese id`);
+import { getDBUsers, getDBUser, addDBUser, changeDBUserPassword } from '../services/api.js'
+export default class Users{
+    constructor(){
+        this.data = [];
     }
-    return user;
-  }
 
-  getUserIndexById(userId) {
-    const index = this.data.findIndex((item) => item.id === userId);
-    if (index === -1) {
-      throw new Error(`No hay usuario con ese id`);
+    async populate(){
+        const usuarios = await getDBUsers();
+        usuarios.forEach(usuario => {
+            let usuarioAIntroducir = new User(usuario.id, usuario.nick, usuario.email, usuario.password);
+            this.data.push(usuarioAIntroducir);
+        });
     }
-    return index;
-  }
 
-  getUserByNickName(nick) {
-    const user = this.data.find((item) => item.nick === nick);
-    if (!user) {
-      throw new Error(`No hay usuario con ese nick`);
+    async getUser(id){
+        const returnedUser = await getDBUser(id);
+        return returnedUser;
     }
-    return user;
-  }
+
+    async addUser(user){
+        const addUser = await addDBUser(user);
+        return addUser;
+    }
+
+    async removeUser(id){
+        const removedUser = await removeDBUser(id);
+        return removedUser;
+    }
+
+    async changeUser(user){
+        const changedUser = await changeDBUser(user)
+        return changedUser;
+    }
+
+    async changeUserPassword(id, newPassword){
+        const userPasswordChanged = await changeDBUserPassword(id, newPassword);
+        return userPasswordChanged;
+    }
+
+    toString(){
+        
+    }
 }
