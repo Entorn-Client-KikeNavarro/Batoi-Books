@@ -1,30 +1,346 @@
-div {
-display: flex;
-  flex-direction: column; /* Coloca elementos uno debajo de otro */
-  align-items: center;    /* Centra horizontalmente */
-  justify-content: center;/* Centra verticalmente */
-  text-align: center;     /* Centra el texto */
-font-family: Arial, Helvetica, sans-serif;
+/* style.css */
+
+:root {
+    --primary-color: #f8d7da; /* Rosa claro para las tarjetas */
+    --secondary-color: #dc3545; /* Rojo para el botón de borrar/mensajes de error */
+    --text-color: #343a40; /* Color de texto oscuro */
+    --link-color: #007bff; /* Color de enlace azul */
+    --border-radius: 0.25rem;
+    --box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
-/* Logo */
-.logo {
-  width: 150px;  /* ajusta el tamaño a tu gusto */  
-    height: auto;
-  margin-bottom: 20px; /* espacio debajo del logo */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6; /* Fondo general de la página */
+    color: var(--text-color);
 }
 
-/* Título principal */
+#app {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+}
+
 header {
-  font-size: 3rem;       /* tamaño grande */
-  font-weight: bold;
-  color: #22333B;        /* tono oscuro */
-  margin-bottom: 10px;   /* espacio debajo del header */
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 20px;
 }
 
-/* Texto inferior */
-p {
-  font-size: 1.2rem;
-  color: #555;           /* gris suave */
-  margin-top: 0;
+.logo {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 100px; /* Ajusta el tamaño del logo si es necesario */
 }
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--link-color);
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Mensajes de alerta */
+#messages {
+    margin-bottom: 20px;
+}
+
+.alert {
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: inherit; /* Hereda el color del texto del alert */
+    opacity: 0.7;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* Lista de libros */
+#list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Columnas responsivas */
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background-color: var(--primary-color);
+    border: 1px solid #f5c6cb; /* Borde más oscuro que el fondo */
+    border-radius: var(--border-radius);
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.card p {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+/* Estilos específicos para el texto del libro */
+.card h3:first-of-type { /* Para "Libro: ID" */
+    font-size: 1.3em;
+    color: #555;
+}
+
+.card h3:nth-of-type(2) { /* Para el código de módulo */
+    font-size: 1.2em;
+    font-weight: normal;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.card p:nth-of-type(1) { /* Editorial */
+    font-weight: bold;
+    color: #444;
+}
+
+.card p:last-of-type { /* Precio */
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #28a745; /* Color verde para el precio */
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* Contenedor de botones en la tarjeta */
+.card > div:last-child {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.card button {
+    background-color: #fff; /* Fondo blanco para los botones de icono */
+    border: 1px solid #ccc;
+    border-radius: 50%; /* Botones circulares */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    padding: 0; /* Elimina padding interno */
+}
+
+.card button:hover {
+    background-color: #e9ecef;
+    border-color: #aaa;
+}
+
+.card button .material-icons {
+    font-size: 20px; /* Tamaño del icono */
+    color: #6c757d; /* Color por defecto de los iconos */
+}
+
+/* Colores específicos para iconos si lo deseas */
+.card button.btn-add-cart .material-icons {
+    color: #007bff; /* Azul para carrito */
+}
+.card button.btn-edit .material-icons {
+    color: #ffc107; /* Naranja para editar */
+}
+.card button.btn-delete .material-icons {
+    color: var(--secondary-color); /* Rojo para borrar */
+}
+
+/* Formulario */
+#book-form {
+    background-color: #f8f9fa; /* Fondo más claro para el formulario */
+    border: 1px solid #dee2e6;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    margin-bottom: 40px;
+}
+
+#book-form h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: var(--text-color);
+    font-size: 1.8em;
+}
+
+#book-form > div {
+    margin-bottom: 15px;
+}
+
+#book-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+#book-form input[type="text"],
+#book-form input[type="number"],
+#book-form input[type="date"],
+#book-form select,
+#book-form textarea {
+    width: calc(100% - 20px); /* Ocupa casi todo el ancho */
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius);
+    box-sizing: border-box; /* Incluye padding y border en el width */
+    font-size: 1em;
+}
+
+#book-form textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+    min-height: 80px;
+}
+
+#book-form input[type="radio"] {
+    margin-right: 5px;
+}
+
+#book-form input[type="radio"] + label {
+    display: inline-block;
+    font-weight: normal;
+    margin-right: 15px;
+}
+
+#book-form button[type="submit"],
+#book-form button[type="reset"] {
+    background-color: #007bff; /* Azul para el botón principal */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1em;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#book-form button[type="reset"] {
+    background-color: #6c757d; /* Gris para el botón de reset */
+}
+
+#book-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+#book-form button[type="reset"]:hover {
+    background-color: #545b62;
+}
+
+
+/* Acerca de... */
+#about {
+    text-align: center;
+    padding: 30px;
+    background-color: #e9ecef;
+    border-radius: var(--border-radius);
+    margin-top: 40px;
+    color: #495057;
+}
+
+#about p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Responsividad básica */
+@media (max-width: 768px) {
+    #app {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    nav ul li {
+        margin: 0 8px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    #book-form {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        font-size: 2em;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    #list {
+        grid-template-columns: 1fr; /* Una columna en pantallas muy pequeñas */
+    }
+
+    #book-form input[type="submit"],
+    #book-form input[type="reset"] {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+}+

@@ -35,6 +35,12 @@ export default class Books{
     return index;
     }
 
+    getBookById(id) {
+        const book = this.data.find((book) => book.id === id);
+        if (!book) throw new Error(`Libro con ID ${id} no encontrado.`);
+        return book;
+    }
+    
     async removeBook(id){
         const removedBok = await removeDBBook(id);
         const index = this.getBookIndexById(id);
