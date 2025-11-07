@@ -18,12 +18,9 @@ export default class Controller{
     async handleSubmitBook(formData) {
         try {
             const bookData = { ...formData };
-            if (!bookData.userId) {
-                bookData.userId = 2;
-            }
 
             if (formData.id) {
-                bookData.id = parseInt(formData.id);
+                bookData.id = formData.id;
                 const updatedBook = await this.books.changeBook(bookData);
                 this.view.updateBookInList(new Book(updatedBook));
                 this.view.renderMessage('success', `Libro ${updatedBook.id} modificado correctamente.`);
@@ -43,9 +40,9 @@ export default class Controller{
 
     async handleRemoveBook(id) {
         try {
-            const book = this.books.getBookById(parseInt(id)); 
+            const book = this.books.getBookById(id); 
             if (confirm(`¿Seguro que quieres borrar el libro ${book.id} (${book.moduleCode})?`)) {
-                await this.books.removeBook(parseInt(id));
+                await this.books.removeBook(id);
                 this.view.removeBook(id);
                 this.view.renderMessage('success', `Libro ${id} eliminado.`);
             }
@@ -56,9 +53,8 @@ export default class Controller{
 
     handleEditBook(id) {
         try {
-            const book = this.books.getBookById(parseInt(id));
+            const book = this.books.getBookById(id);
             this.view.populateForm(book);
-            window.scrollTo(0, 0);
         } catch (error) {
             this.view.renderMessage('error', `Error al cargar datos para editar: ${error.message}`);
         }
@@ -66,7 +62,7 @@ export default class Controller{
 
     handleAddToCart(id) {
         try {
-            const book = this.books.getBookById(parseInt(id));
+            const book = this.books.getBookById(id);
             this.cart.addItem(book);
             this.view.renderMessage('success', `Libro ${id} añadido al carrito.`);
             console.log('Estado del carrito:', this.cart.toString());

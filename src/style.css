@@ -202,7 +202,7 @@ nav ul li a:hover {
 }
 
 /* Formulario */
-#book-form {
+#form {
     background-color: #f8f9fa; /* Fondo más claro para el formulario */
     border: 1px solid #dee2e6;
     border-radius: var(--border-radius);
@@ -210,7 +210,7 @@ nav ul li a:hover {
     margin-bottom: 40px;
 }
 
-#book-form h3 {
+#form h3 {
     text-align: center;
     margin-top: 0;
     margin-bottom: 25px;
@@ -218,22 +218,22 @@ nav ul li a:hover {
     font-size: 1.8em;
 }
 
-#book-form > div {
+#form > div {
     margin-bottom: 15px;
 }
 
-#book-form label {
+#form label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
     color: #555;
 }
 
-#book-form input[type="text"],
-#book-form input[type="number"],
-#book-form input[type="date"],
-#book-form select,
-#book-form textarea {
+#form input[type="text"],
+#form input[type="number"],
+#form input[type="date"],
+#form select,
+#form textarea {
     width: calc(100% - 20px); /* Ocupa casi todo el ancho */
     padding: 10px;
     border: 1px solid #ced4da;
@@ -242,23 +242,23 @@ nav ul li a:hover {
     font-size: 1em;
 }
 
-#book-form textarea {
+#form textarea {
     resize: vertical; /* Permite redimensionar verticalmente */
     min-height: 80px;
 }
 
-#book-form input[type="radio"] {
+#form input[type="radio"] {
     margin-right: 5px;
 }
 
-#book-form input[type="radio"] + label {
+#form input[type="radio"] + label {
     display: inline-block;
     font-weight: normal;
     margin-right: 15px;
 }
 
-#book-form button[type="submit"],
-#book-form button[type="reset"] {
+#form button[type="submit"],
+#form button[type="reset"] {
     background-color: #007bff; /* Azul para el botón principal */
     color: white;
     padding: 10px 20px;
@@ -270,15 +270,15 @@ nav ul li a:hover {
     transition: background-color 0.3s ease;
 }
 
-#book-form button[type="reset"] {
+#form button[type="reset"] {
     background-color: #6c757d; /* Gris para el botón de reset */
 }
 
-#book-form button[type="submit"]:hover {
+#form button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-#book-form button[type="reset"]:hover {
+#form button[type="reset"]:hover {
     background-color: #545b62;
 }
 
@@ -313,7 +313,7 @@ nav ul li a:hover {
         padding: 15px;
     }
 
-    #book-form {
+    #form {
         padding: 20px;
     }
 }
@@ -337,8 +337,8 @@ nav ul li a:hover {
         grid-template-columns: 1fr; /* Una columna en pantallas muy pequeñas */
     }
 
-    #book-form input[type="submit"],
-    #book-form input[type="reset"] {
+    #form input[type="submit"],
+    #form input[type="reset"] {
         width: 100%;
         margin-bottom: 10px;
         margin-right: 0;

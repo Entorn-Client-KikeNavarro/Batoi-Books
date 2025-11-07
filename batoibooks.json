@@ -2208,16 +2208,15 @@
       "id": "9"
     },
     {
-      "userId": 5,
+      "id": "10",
+      "userId": 2,
       "moduleCode": "5021",
       "publisher": "Apunts",
       "price": 5,
       "pages": 57,
       "status": "good",
-      "photo": "",
       "comments": "",
-      "soldDate": "",
-      "id": "10"
+      "soldDate": ""
     }
   ]
 }

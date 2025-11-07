@@ -5,11 +5,10 @@ export default class View {
     constructor() {
         this.messages = document.getElementById("messages");
         this.lista = document.getElementById("list");
-        this.form = document.getElementById("book-form");
+        this.form = document.getElementById("form");
         this.formTitle = document.getElementById("form-title");
         this.bookIdDiv = document.getElementById("book-id-div");
         this.bookIdInput = document.getElementById("book-id");
-        this.bookUserId = document.getElementById("book-userId");
         this.bookModuleCode = document.getElementById("book-moduleCode");
         this.bookPrice = document.getElementById("book-price");
         this.bookPages = document.getElementById("book-pages");
@@ -28,7 +27,7 @@ export default class View {
 
     _getFormData() {
         const id = this.bookIdInput.value;
-        const userId = parseInt(this.bookUserId.value);
+        const userId = 2;
         const moduleCode = this.bookModuleCode.value;
         const publisher = this.form.elements.publisher.value;
         const price = parseFloat(this.bookPrice.value);
@@ -51,7 +50,6 @@ export default class View {
         this.formTitle.textContent = 'Editar libro';
         this.bookIdDiv.style.display = 'block';
         this.bookIdInput.value = book.id;
-        this.bookUserId.value = book.userId;
         this.bookModuleCode.value = book.moduleCode;
         this.bookPrice.value = book.price;
         this.bookPages.value = book.pages;
@@ -59,6 +57,8 @@ export default class View {
         this.bookSoldDate.value = book.soldDate;
         this.form.elements.publisher.value = book.publisher;
         this.form.elements.status.value = book.status;
+
+        this.form.scrollIntoView();
     }
 
     _createBookCard(book) {
@@ -68,7 +68,7 @@ export default class View {
             <p>${book.publisher}</p><br>
             <p>${book.pages} paginas</p><br>
             <p>Estado: ${book.status}</p><br>
-            <p>vendido en: ${book.soldDate || 'No vendido'}</p><br>
+            <p>vendido el: ${book.soldDate || 'No vendido'}</p><br>
             <p>${book.comments}</p><br>
             <p>${book.price}€</p>
             <div>

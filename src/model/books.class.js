@@ -28,28 +28,36 @@ export default class Books{
 
     async changeBook(book){
         const bookchanged = await changeDBBook(book);
-        return bookchanged;
+        const bookWithClass = new Book(bookchanged);
+        const index = this.getBookIndexById(bookWithClass.id);
+        
+        if (index === -1) {
+            throw new Error("Libro no encontrado en datos locales tras actualizar.");
+        }
+
+        this.data[index] = bookWithClass;
+        return bookWithClass;
     }
 
     getBookIndexById(bookId) {
-    const index = this.data.findIndex((book) => book.id === bookId);
-    if (index === -1) throw new Error("Book not found");
-    return index;
+    const index = this.data.findIndex((book) => book.id == bookId);
+        if (index === -1) throw new Error("Book not found");
+        return index;
     }
 
     getBookById(id) {
-        const book = this.data.find((book) => book.id === id);
+        const book = this.data.find((book) => book.id == id);
         if (!book) throw new Error(`Libro con ID ${id} no encontrado.`);
         return book;
     }
     
     async removeBook(id){
-        const removedBok = await removeDBBook(id);
+        await removeDBBook(id);
         const index = this.getBookIndexById(id);
         this.data.splice(index, 1);
     }
 
     toString(){
-        
+        return this.data.map(book => book.toString()).join('\n');
     }
 }

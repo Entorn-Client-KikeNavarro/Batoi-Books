@@ -27,17 +27,13 @@ document.querySelector('#app').innerHTML = `
     <div>
         <div id="list"></div>
         
-        <form id="book-form">
+        <form id="form">
             <h3 id="form-title">Añadir libro</h3>
 
             <div style="display: none;" id="book-id-div">
                 <label for="book-id">ID:</label>
                 <input type="text" name="id" id="book-id" disabled>
             </div>
-
-            <div>
-                <label for="book-userId">userId: </label>
-                <input type="number" name="userId" id="book-userId" value="2" required> </div>
 
             <div>
                 <label for="book-moduleCode">moduleCode: </label>
@@ -47,12 +43,8 @@ document.querySelector('#app').innerHTML = `
             </div>
 
             <div>
-                <p>publisher: </p>
-                <input type="radio" id="Apunts-radio" name="publisher" value="apunts" required>
-                <label for="Apunts-radio">Apunts</label>
-
-                <input type="radio" id="McGraw-Hill-radio" name="publisher" value="McGraw-Hill">
-                <label for="McGraw-Hill-radio">McGraw-Hill</label>
+                <label for="book-publisher">Publisher: </label>
+                <input type="text" id="book-publisher" name="publisher" required>
             </div>
 
             <div>
@@ -91,7 +83,7 @@ document.querySelector('#app').innerHTML = `
     </div>
     <br>
     <div id="about">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem sapiente illum corrupti repellendus! Ad natus quod ullam quibusdam, cum perspiciatis iste ex est inventore doloribus. Tempore sit harum beatae assumenda.</p>
+        <p>BatoiBooks. Kike Navarro.</p>
     </div>
 </div>
 `
