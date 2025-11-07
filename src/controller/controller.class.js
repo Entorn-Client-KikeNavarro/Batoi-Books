@@ -15,7 +15,7 @@ export default class Controller{
         this.cart = new Cart();
     }
 
-    async handleSubmitProductForm(formData) {
+    async handleSubmitBook(formData) {
         try {
             const bookData = { ...formData };
             if (!bookData.userId) {
@@ -77,7 +77,7 @@ export default class Controller{
     
     async init(){
         try{
-            this.view.bindSubmitForm(this.handleSubmitProductForm.bind(this));
+            this.view.bindSubmitForm(this.handleSubmitBook.bind(this));
             this.view.bindResetForm(); 
             this.view.bindBookActions(
                 this.handleAddToCart.bind(this),
