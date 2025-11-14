@@ -27,8 +27,7 @@ document.querySelector('#app').innerHTML = `
     <div>
         <div id="list"></div>
         
-        <form id="form">
-            <h3 id="form-title">Añadir libro</h3>
+        <form id="form" novalidate> <h3 id="form-title">Añadir libro</h3>
 
             <div style="display: none;" id="book-id-div">
                 <label for="book-id">ID:</label>
@@ -49,12 +48,12 @@ document.querySelector('#app').innerHTML = `
 
             <div>
                 <label for="book-price">Precio: </label>
-                <input type="number" name="price" id="book-price" required step="0.01">
+                <input type="number" name="price" id="book-price" required step="0.01" min="0">
             </div>
 
             <div>
                 <label for="book-pages">Paginas: </label>
-                <input type="number" name="pages" id="book-pages" required>
+                <input type="number" name="pages" id="book-pages" required min="0">
             </div>
             
             <div>

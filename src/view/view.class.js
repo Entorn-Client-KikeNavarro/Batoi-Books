@@ -123,8 +123,13 @@ export default class View {
     bindSubmitForm(handler) {
         this.form.addEventListener('submit', event => {
             event.preventDefault();
-            const formData = this._getFormData();
-            handler(formData);
+
+            if (!this.form.checkValidity()) {
+                this.form.reportValidity();
+            } else {
+                const formData = this._getFormData();
+                handler(formData);
+            }
         });
     }
 
